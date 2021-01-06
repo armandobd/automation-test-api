@@ -1,7 +1,7 @@
 exports.handler = async (event) => {
     const {headers, body} = event;
     console.log("headers", headers, "body", body);
-    if (!headers || !headers.authorization) {
+    if (!headers || !headers.apiKey || headers.apiKey !== "secureKey") {
         return {
             statusCode: 400,
             body:JSON.stringify({message: "Bad request"})
