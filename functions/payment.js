@@ -9,6 +9,7 @@ exports.handler = async (event) => {
     }
     
     if (httpMethod !== "GET" || httpMethod !== "POST") {
+        console.log("httpMethod", httpMethod)
         return {
             statusCode: 405,
             body: JSON.stringify({message: `Method ${httpMethod} not allowed`})
