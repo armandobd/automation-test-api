@@ -1,5 +1,6 @@
 exports.handler = async (event) => {
     const {headers, body} = event;
+    console.log("headers", headers, "body", body);
     if (!headers || !headers.authorization) {
         return {
             statusCode: 400,
