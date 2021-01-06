@@ -1,5 +1,3 @@
-const {validateRequest, handleError, parseContent} = require("../lib/request");
-
 exports.handler = async (event) => {
     const {headers, body} = event;
     if (!headers || !headers.authorization) {
