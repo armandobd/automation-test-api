@@ -22,16 +22,9 @@ exports.handler = async (event) => {
                     statusCode: 200,
                     body: JSON.stringify(
                             {
-                                data: [
-                                    {
-                                        orderId,
-                                        transaction_status: "Pending"
-                                    }
-                                ]
-                            },
-                            {
-                              responseCode: "0",
-                            }
+                                orderId,
+                                transaction_status: "Pending"
+                            }    
                         )
                 }
 
