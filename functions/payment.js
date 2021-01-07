@@ -8,35 +8,30 @@ exports.handler = async (event) => {
         }
     }
     
-    if (httpMethod !== "GET" || httpMethod !== "POST") {
-        console.log("httpMethod", httpMethod)
-        return {
-            statusCode: 405,
-            body: JSON.stringify({message: `Method ${httpMethod} not allowed`})
-        }
-    }
-
-    if (httpMethod === "GET") {
-        return {
-            statusCode: 200,
-            body: JSON.stringify()
-        }
-    }
-
-    if (httpMethod === "POST") {
-        let content;
-        try {
-            content = parseContent(body);
+    switch (httpMethod) {
+        case "GET":
             return {
                 statusCode: 200,
                 body: JSON.stringify()
             }
-        } catch (error) {
+        case "POST":
+            let content;
+            try {
+                content = parseContent(body);
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify()
+                }
+            } catch (error) {
+                    return {
+                        statusCode: 500,
+                        body:JSON.stringify({message: `${error}`})
+                    }
+                }
+        default:
             return {
-                statusCode: 500,
-                body:JSON.stringify({message: `${error}`})
+                statusCode: 405,
+                body: JSON.stringify({message: `Method ${httpMethod} not allowed`})
             }
-        }
-        
-    }
+    }   
 }
