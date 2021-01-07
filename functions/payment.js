@@ -10,6 +10,34 @@ exports.handler = async (event) => {
     
     switch (httpMethod) {
         case "GET":
+            let content;
+            try {
+                content = JSON.parse(body);
+                const {orderId} = content;
+                if (typeof orderId !== Number || orderId < 1000 || orderId > 99999) {
+                    return {
+                        statusCode: 400,
+                        body: JSON.stringify({error: "Order Id not valid"})
+                    }
+                }
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify({
+                        data: [
+                            {
+                                orderId,
+                                transaction_status: "Pending"
+                            }
+                        ]
+                    })
+                }
+
+            } catch (error) {
+                return {
+                        statusCode: 500,
+                        body:JSON.stringify({error: `${error}`})
+                    }
+            }
             return {
                 statusCode: 200,
                 body: JSON.stringify()
