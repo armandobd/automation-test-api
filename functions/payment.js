@@ -47,7 +47,7 @@ exports.handler = async (event) => {
             try {
                 content = JSON.parse(body);
 
-                const {amount, currency, country} = content;
+                const {amount, currency, country_code} = content;
 
                 if (amount < 0 || amount > 1000) {
                     return {
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
                     }
                 }
 
-                if (country === "DE") {
+                if (country_code === "DE") {
                     const orderId = Math.floor(Math.random()*100000);
                     if (currency === "EUR") {
                         return {
@@ -71,8 +71,7 @@ exports.handler = async (event) => {
                                             status: true,
                                             message: "Transaction succeeded"
                                         },
-                                    ]},
-                                    {
+                                    ],
                                         responseCode: "0",
                                     }
                             )
@@ -83,7 +82,7 @@ exports.handler = async (event) => {
                             body: JSON.stringify({error: `Currency not allowed on selected country`})
                         }
                     }
-                } else if (country === "AU") {
+                } else if (country_code === "AU") {
                     if (currency === "AUD") {
                         return {
                             statusCode: 200, 
@@ -97,19 +96,18 @@ exports.handler = async (event) => {
                                             status: true,
                                             message: "Transaction succeeded"
                                         },
-                                    ]},
-                                    {
-                                        responseCode: "0",
-                                    }
-                            )
-                        }
+                                    ],
+                                    responseCode: "0",         
+                                }
+                                )
+                            }
                     } else {
                         return {
                             statusCode: 400,
                             body: JSON.stringify({error: `Currency not allowed on selected country`})
                         }
                     }
-                } else if (country === "SG") {
+                } else if (country_code === "SG") {
                     if (currency === "SGD") {
                         return {
                             statusCode: 200, 
@@ -123,12 +121,11 @@ exports.handler = async (event) => {
                                             status: true,
                                             message: "Transaction succeeded"
                                         },
-                                    ]},
-                                    {
-                                        responseCode: "0",
-                                    }
-                            )
-                        }
+                                    ],
+                                    responseCode: "0",                                    
+                                }
+                                )
+                            }
                     } else {
                         return {
                             statusCode: 400,
