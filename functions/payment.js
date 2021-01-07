@@ -12,7 +12,7 @@ exports.handler = async (event) => {
         case "GET":
             try {
                 const {orderId} = JSON.parse(body);
-                if (typeof orderId !== Number || orderId < 1000 || orderId > 99999) {
+                if (typeof orderId !== "number" || orderId < 1000 || orderId > 99999) {
                     return {
                         statusCode: 400,
                         body: JSON.stringify({error: "Order Id not valid"})
