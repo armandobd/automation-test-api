@@ -11,9 +11,7 @@ exports.handler = async (event) => {
     switch (httpMethod) {
         case "GET":
             try {
-                const {orderId} = queryStringParameters;
-                console.log("orderId", orderId);
-                console.log("typeof orderId", typeof orderId);
+                const orderId = parseInt(queryStringParameters.orderId);
                 if (!orderId || typeof orderId !== "number" || orderId < 1000 || orderId > 99999) {
                     return {
                         statusCode: 400,
