@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
-    const {headers, body, httpMethod} = event;
-    console.log("headers", headers, "body", body);
+    const {headers, body, httpMethod, orderId: {queryStringParameters}} = event;
+    console.log("headers", headers, "body", body, "queryStringParameters", queryStringParameters);
     if (!headers || !headers.api_key || headers.api_key !== "secureKey") {
         return {
             statusCode: 401,
@@ -11,8 +11,8 @@ exports.handler = async (event) => {
     switch (httpMethod) {
         case "GET":
             try {
-                const {orderId} = JSON.parse(body);
-                if (typeof orderId !== "number" || orderId < 1000 || orderId > 99999) {
+                // const {orderId} = JSON.parse(body);
+                if (!orderId || typeof orderId !== "number" || orderId < 1000 || orderId > 99999) {
                     return {
                         statusCode: 400,
                         body: JSON.stringify({error: "Order Id not valid"})
